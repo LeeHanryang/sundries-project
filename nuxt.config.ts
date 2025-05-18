@@ -1,29 +1,34 @@
-// nuxt.config.ts (최소 예시)
+// nuxt.config.ts
+import { defineNuxtConfig } from 'nuxt/config'
+
 export default defineNuxtConfig({
   modules: [
-    "@nuxt/ui",
-    "@pinia/nuxt",
-    "@nuxt/icon",
-    "@nuxt/image",
-    "@nuxt/eslint",
+    '@nuxt/ui', // Nuxt UI (Tailwind + Reka)
+    '@pinia/nuxt', // Pinia
+    '@nuxt/icon', // Iconify
+    '@nuxt/image', // Image optimizer
+    '@nuxt/eslint', // ESLint preset
   ],
-  typescript: {
-    // strict: true ← 기본값이라 생략 가능
-    shim: false, // <script setup>에서 ref.value 없이 사용하려면 권장
-  },
-  ui: {
-    theme: {
-      // ✅ 존재하는 필드
-      colors: ["primary", "neutral", "tertiary"], // 별칭을 늘릴 때만
-    },
-  },
-  runtimeConfig: {
-    // SSR·Nitro에서만 노출 (비공개)
-    apiSecret: "top-secret",
 
-    public: {
-      // 환경변수 없으면 /api 로 폴백 → 모크 라우트
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || "/api",
+  // 글로벌 CSS (Tailwind 지시문 포함)
+  css: ['~/assets/css/tailwind.css'],
+  ui: {
+    // 가상 폰트 CSS 생성 비활성화 → MIME 오류 방지
+    fonts: false,
+
+    // Tailwind 색상 alias
+    theme: {
+      colors: ['primary', 'neutral', 'tertiary'],
     },
   },
-});
+
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
+    },
+  },
+
+  typescript: {
+    shim: false, // <script setup>에서 ref.value 없이 쓰려면
+  },
+})
