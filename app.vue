@@ -1,9 +1,9 @@
+<!-- app.vue -->
 <template>
   <AppAlert />
-  <Header />
-  <NuxtPage />
+  <NuxtLayout name="default">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
-<script setup lang="ts">
-import Header from '@/components/Header.vue'
-</script>
+<script setup></script>

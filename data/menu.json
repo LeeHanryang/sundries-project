@@ -1,0 +1,5 @@
+[
+  { "label": "AI음식추천", "path": "/ai-food" },
+  { "label": "오늘의행운테스트", "path": "/lucky-test" },
+  { "label": "체감시간 테스트", "path": "/time-test" }
+]

@@ -22,6 +22,12 @@ export default defineNuxtConfig({
     },
   },
 
+  colorMode: {
+    preference: 'system', // 'light' | 'dark' | 'system'
+    fallback: 'light',
+    classSuffix: '',
+  },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',

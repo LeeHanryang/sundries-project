@@ -1,2 +1,14 @@
-/* assets/css/tailwind.css */
+/* 1) Tailwind base (reset, preflight) */
 @import 'tailwindcss';
+
+/* 2) Nuxt UI 의 CSS 변수(@ui-color-*, scheme-light, .dark:scheme-dark 등) */
+@import '@nuxt/ui';
+
+@layer base {
+  /* html 태그에 트랜지션 적용 */
+  html,
+  body,
+  #__nuxt {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
