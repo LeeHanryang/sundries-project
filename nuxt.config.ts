@@ -3,38 +3,46 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/ui', // Nuxt UI (Tailwind + Reka)
-    '@pinia/nuxt', // Pinia
-    '@nuxt/icon', // Iconify
-    '@nuxt/image', // Image optimizer
-    '@nuxt/eslint', // ESLint preset
+    '@nuxt/ui',
+    '@pinia/nuxt',
+    '@nuxt/icon',
+    '@nuxt/image',
+    '@nuxt/eslint',
+    '@sidebase/nuxt-auth',
   ],
 
-  // 글로벌 CSS (Tailwind 지시문 포함)
   css: ['~/assets/css/tailwind.css'],
-  ui: {
-    // 가상 폰트 CSS 생성 비활성화 → MIME 오류 방지
-    fonts: false,
 
-    // Tailwind 색상 alias
-    theme: {
-      colors: ['primary', 'neutral', 'tertiary'],
+  ui: { fonts: false, theme: { colors: ['primary', 'neutral', 'tertiary'] } },
+
+  colorMode: { preference: 'system', fallback: 'light', classSuffix: '' },
+
+  /**
+   * nuxt-auth 설정
+   * baseURL === '/api/auth' (경로만) · originEnvKey === 'AUTH_ORIGIN'
+   * → 실제 풀 URL은  http(s)://<AUTH_ORIGIN>/api/auth 로 자동 조합
+   */
+  auth: {
+    isEnabled: true,
+    provider: {
+      type: 'authjs',
+      defaultProvider: 'google', // signIn() 호출 시 기본
+      addDefaultCallbackUrl: true,
+    },
+    sessionRefresh: {
+      // 창 포커스·주기적 재검사
+      enableOnWindowFocus: true,
+      enablePeriodically: true,
     },
   },
 
-  colorMode: {
-    preference: 'system', // 'light' | 'dark' | 'system'
-    fallback: 'light',
-    classSuffix: '',
-  },
-
   runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET, // private
     public: {
+      authOrigin: process.env.AUTH_ORIGIN, // <http|https>://domain
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
     },
   },
 
-  typescript: {
-    shim: false, // <script setup>에서 ref.value 없이 쓰려면
-  },
+  typescript: { shim: false },
 })
