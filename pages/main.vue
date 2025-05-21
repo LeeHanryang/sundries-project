@@ -1,29 +1,29 @@
 <!-- pages/main.vue -->
 <template>
-  <div class="mx-auto mt-20 max-w-2xl rounded-lg bg-white p-6 shadow">
-    <h1 class="mb-4 text-2xl font-bold">마이 페이지</h1>
+  <div class="mx-auto mt-20 max-w-2xl rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-lg">
+    <h1 class="mb-4 text-2xl font-bold text-gray-800">마이 페이지</h1>
 
     <div v-if="loadingUser" class="text-center text-gray-500">사용자 정보를 불러오는 중...</div>
 
-    <div v-else-if="user">
-      <p class="mb-2">
-        <strong>ID:</strong>
+    <div v-else-if="user" class="rounded-md bg-white p-4 shadow-sm">
+      <p class="mb-2 text-gray-700">
+        <strong class="text-gray-800">ID:</strong>
         {{ user.id }}
       </p>
-      <p class="mb-2">
-        <strong>이메일:</strong>
+      <p class="mb-2 text-gray-700">
+        <strong class="text-gray-800">이메일:</strong>
         {{ user.email }}
       </p>
-      <p class="mb-2">
-        <strong>이름:</strong>
+      <p class="mb-2 text-gray-700">
+        <strong class="text-gray-800">이름:</strong>
         {{ user.name }}
       </p>
       <!-- 기타 user object 안의 필드들도 이와 같이 표시 -->
     </div>
 
-    <div v-else class="text-center">
+    <div v-else class="rounded-md bg-white p-4 text-center shadow-sm">
       <p class="mb-4 text-red-500">로그인이 필요합니다.</p>
-      <NuxtLink to="/auth/login" class="text-indigo-600 hover:underline">
+      <NuxtLink to="/auth/login" class="text-indigo-600 hover:text-indigo-800 hover:underline">
         로그인 페이지로 이동
       </NuxtLink>
     </div>
